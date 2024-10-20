@@ -1,0 +1,16 @@
+on: 
+  pull_request:
+    types: [labeled]
+    
+name: Notify about PR ready for review
+jobs:
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Slack Notification
+      uses: kv109/action-ready-for-review@0.2
+      env:
+        SLACK_CHANNEL: testbot           # required
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} # required
