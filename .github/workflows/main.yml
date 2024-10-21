@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Slack Notification
-      uses: kv109/action-ready-for-review@0.2
+      uses: 4IP/slack-notif-review@0.1
       env:
         SLACK_CHANNEL: "#testbot"           # required
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} # required
