@@ -13,7 +13,6 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.27.0
       with:
-        working-directory: ./github/workflows/
         # This data can be any valid JSON from a previous step in the GitHub Action
         payload-file-path: "./payload-slack-ready-for-review.json"
         payload-file-path-parsed: false
