@@ -1,22 +1,23 @@
+name: Greeting from Mona
+
 on: 
   pull_request:
     types: [labeled]
     
-name: Notify about PR ready for review
 jobs:
-  slackNotification:
-  run-on: ubuntu-latest
-  steps:
-  usee: actions/checkout@v2
-  - name: Send custom JSON data to Slack workflow
-    id: slack
-    uses: slackapi/slack-github-action@v1.27.0
-    with:
-      # This data can be any valid JSON from a previous step in the GitHub Action
-      payload: |
-        {
-          "key": "value",
-          "foo": "bar"
-        }
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+  my-job:
+    name: My Job
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send custom JSON data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.27.0
+      with:
+        # This data can be any valid JSON from a previous step in the GitHub Action
+        payload: |
+          {
+            "key": "value",
+            "foo": "bar"
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
