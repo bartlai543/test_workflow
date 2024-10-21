@@ -15,9 +15,12 @@ jobs:
       with:
         # This data can be any valid JSON from a previous step in the GitHub Action
         payload: |
-          {
-            "key": "value",
-            "foo": "bar"
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "New Paid Time Off request from <example.com|Fred Enriquez>\n\n<https://example.com|View request>"
           }
+        }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
