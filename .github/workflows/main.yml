@@ -8,7 +8,7 @@ jobs:
     name: Slack Notification
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v2
     - name: Slack Notification
       uses: 4IP/slack-notif-review@0.1
       env:
