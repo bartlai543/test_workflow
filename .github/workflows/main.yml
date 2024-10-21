@@ -8,10 +8,13 @@ jobs:
     name: Slack Notification
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Slack Notification
-      uses: 4IP/slack-notif-review@0.1
-      env:
-        SLACK_CHANNEL: "#testbot"           # required
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} # required
-        USERNAME: "incoming-webhook"
+      uses: slackapi/slack-github-action@v1.27.0
+        with:
+        # This data can be any valid JSON from a previous step in the GitHub Action
+        payload: |
+          {
+            "key": "value",
+            "foo": "bar"
+          }
+        env:
+          SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK }}
