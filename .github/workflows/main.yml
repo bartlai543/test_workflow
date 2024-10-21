@@ -14,6 +14,6 @@ jobs:
       uses: slackapi/slack-github-action@v1.27.0
       with:
         # This data can be any valid JSON from a previous step in the GitHub Action
-        payload-file-path: "payload-slack-ready-for-review.json"
+        payload-file-path: "./payload-slack-ready-for-review.json"
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
