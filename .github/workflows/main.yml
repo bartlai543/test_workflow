@@ -12,6 +12,6 @@ jobs:
     - name: Slack Notification
       uses: kv109/action-ready-for-review@0.2
       env:
-        SLACK_CHANNEL: testbot           # required
+        SLACK_CHANNEL: "#testbot"           # required
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} # required
-        USERNAME: TESTBOT
+        USERNAME: "incoming-webhook"
