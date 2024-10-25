@@ -18,4 +18,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          echo "${{ needs.detect.outputs.checked }}"
           echo "${{ contains(fromJSON(needs.detect.outputs.checked), 'trigger test') }}"
