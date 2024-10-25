@@ -13,7 +13,7 @@ jobs:
         id: detect
         with:
           action: 'detect'
-  Send-slack:
+  send-slack:
     needs: detect-edited-list
     if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post') }}
     runs-on: ubuntu-latest
