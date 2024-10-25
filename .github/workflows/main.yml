@@ -14,9 +14,12 @@ jobs:
           action: 'detect'
   test:
     needs: detect
-    if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'trigger test') }}
+    #if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'trigger test') }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo Add your CI here
-        
-    
+      - run: |
+          IFS=',' read -r -a array <<< "${{ fromJSON(needs.detect.outputs.checked) }}"
+          for item in "${array[@]}"
+          do
+            echo "Array item: $item"
+          done
