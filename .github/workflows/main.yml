@@ -10,10 +10,22 @@ jobs:
     outputs:
       checked: ${{ steps.detect.outputs.checked }}
     steps:
-      - uses: marocchino/checkbox-action@v1
+      - name: test1
+        uses: marocchino/checkbox-action@v1
         id: detect
         with:
           action: 'detect'
-      - name: test
+      - name: test2
         run: "echo ${{steps.detect.outputs.checked}}"
+      - name: test3
+        if: ${{ contains(fromJSON(steps.detect.outputs.checked), 'Post PR link to #deploy Slack channel')}}
+        uses: slackapi/slack-github-action@1.27.0
+        with:
+          payload: |
+            {
+              "text": ":rocket: New PR ready for review! :rocket:\nTitle: *${{ github.event.pull_request.title }}*\nAuthor: ${{ github.event.pull_request.user.login }}\nURL: ${{ github.event.pull_request.html_url }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        
     
