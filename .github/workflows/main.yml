@@ -1,4 +1,3 @@
-
 name: Notify about a PR which specific list is checked on the slack channel \#deploy
 
 on:
