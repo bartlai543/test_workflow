@@ -17,4 +17,5 @@ jobs:
   send:
     needs: detect
     runs-on: ubuntu-latest
-    outputs: "${{ fromJSON(needs.detect.outputs.checked) }}"
+    outputs: 
+      checked: "${{ fromJSON(needs.detect.outputs.checked) }}"
