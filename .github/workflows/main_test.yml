@@ -15,17 +15,21 @@ jobs:
           action: 'detect'
   send-slack:
     needs: detect
-    if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post PR link to') }}
     runs-on: ubuntu-latest
-    steps:
-    - name: Send custom JSON data to Slack workflow
-      id: slack
-      uses: slackapi/slack-github-action@v1.27.0
-      with:
+    run: |
+      echo ${{ fromJSON(needs.detect.outputs.checked)}}
+
+    ##if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post PR link to #deploy Slack channel') }}
+    ##runs-on: ubuntu-latest
+    ##steps:
+    ##- name: Send custom JSON data to Slack workflow
+      ##id: slack
+      ##uses: slackapi/slack-github-action@v1.27.0
+      ##with:
         # This data can be any valid JSON from a previous step in the GitHub Action
-        payload: |
-          {
-            "text": ":rocket: New PR ready for review! :rocket:\nTitle: *${{ github.event.pull_request.title }}*\nAuthor: ${{ github.event.pull_request.user.login }}\nURL: ${{ github.event.pull_request.html_url }}"
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        ##payload: |
+         ## {
+         ##   "text": ":rocket: New PR ready for review! :rocket:\nTitle: *${{ github.event.pull_request.title }}*\nAuthor: ${{ github.event.pull_request.user.login }}\nURL: ${{ github.event.pull_request.html_url }}"
+       ##   }
+    ##  env:
+       ## SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
