@@ -14,8 +14,3 @@ jobs:
         id: detect
         with:
           action: 'detect'
-  send:
-    needs: detect
-    runs-on: ubuntu-latest
-    outputs: 
-      checked: "${{ fromJSON(needs.detect.outputs.checked) }}"
