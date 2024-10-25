@@ -15,7 +15,7 @@ jobs:
           action: 'detect'
   Send-slack:
     needs: detect-edited-list
-    if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post PR link to ''#deploy'' Slack channel') }}
+    if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post') }}
     runs-on: ubuntu-latest
     steps:
     - name: Send custom JSON data to Slack workflow
