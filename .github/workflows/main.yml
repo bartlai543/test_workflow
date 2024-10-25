@@ -14,3 +14,5 @@ jobs:
         id: detect
         with:
           action: 'detect'
+        run: "echo ${{fromJSON(needs.detect.outputs.checked)}}"
+    
