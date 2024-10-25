@@ -3,18 +3,8 @@ on:
     types:
       - edited
 jobs:
-  detect:
-    runs-on: ubuntu-latest
-    outputs:
-      checked: ${{ steps.detect.outputs.checked }}
-    steps:
-      - uses: marocchino/checkbox-action@v1
-        id: detect
-        with:
-          action: 'detect'
   Send-slack:
-    needs: detect
-    if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'trigger test') }}
+    if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post PR link to #deploy Slack channel') }}
     runs-on: ubuntu-latest
     steps:
     - name: Send custom JSON data to Slack workflow
