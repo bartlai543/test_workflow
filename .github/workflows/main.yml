@@ -15,5 +15,5 @@ jobs:
         with:
           action: 'detect'
       - name: test
-        run: "echo ${{needs.detect.outputs.checked}}"
+        run: "echo ${{steps.detect.outputs.checked}}"
     
