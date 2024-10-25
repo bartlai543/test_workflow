@@ -13,11 +13,14 @@ jobs:
         id: detect
         with:
           action: 'detect'
-  send-slack:
-    needs: detect
-    runs-on: ubuntu-latest
-    run: |
-      echo ${{ fromJSON(needs.detect.outputs.checked)}}
+      - name: test
+        run: |
+          echo ${{ fromJSON(needs.detect.outputs.checked)}}
+ # send-slack:
+  #  needs: detect
+   # runs-on: ubuntu-latest
+    #run: |
+     # echo ${{ fromJSON(needs.detect.outputs.checked)}}
 
     ##if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post PR link to #deploy Slack channel') }}
     ##runs-on: ubuntu-latest
