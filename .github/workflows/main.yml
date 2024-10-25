@@ -19,7 +19,7 @@ jobs:
         run: "echo ${{steps.detect.outputs.checked}}"
       - name: test3
         if: ${{ contains(fromJSON(steps.detect.outputs.checked), 'Post PR link to \#deploy Slack channel')}}
-        uses: slackapi/slack-github-action@1.27.0
+        uses: slackapi/slack-github-action@v1.27.0
         with:
           payload: |
             {
