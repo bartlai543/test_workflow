@@ -4,7 +4,7 @@ on:
       - edited
       
 jobs:
-  detect-edited-list:
+  detect:
     runs-on: ubuntu-latest
     outputs:
       checked: ${{ steps.detect.outputs.checked }}
@@ -14,7 +14,7 @@ jobs:
         with:
           action: 'detect'
   send-slack:
-    needs: detect-edited-list
+    needs: detect
     if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post') }}
     runs-on: ubuntu-latest
     steps:
