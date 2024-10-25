@@ -1,0 +1,20 @@
+on:
+  pull_request:
+    types:
+      - edited
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      checked: ${{ steps.detect.outputs.checked }}
+    steps:
+      - uses: marocchino/checkbox-action@v1
+        id: detect
+        with:
+          action: 'detect'
+  test:
+    needs: detect
+    if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'trigger test') }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Add your CI here
