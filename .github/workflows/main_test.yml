@@ -2,8 +2,19 @@ on:
   pull_request:
     types:
       - edited
+      
 jobs:
+  detect-edited-list:
+    runs-on: ubuntu-latest
+    outputs:
+      checked: ${{ steps.detect.outputs.checked }}
+    steps:
+      - uses: marocchino/checkbox-action@v1
+        id: detect
+        with:
+          action: 'detect'
   Send-slack:
+    needs: detect-edited-list
     if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'Post PR link to #deploy Slack channel') }}
     runs-on: ubuntu-latest
     steps:
