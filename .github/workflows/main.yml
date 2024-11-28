@@ -1,3 +1,5 @@
+name: Checkbox checker
+
 on:
   pull_request:
     types:
@@ -12,11 +14,19 @@ jobs:
         id: detect
         with:
           action: 'detect'
-  test:
+  send-slack-notification:
     needs: detect
-    #if: ${{ contains(fromJSON(needs.detect.outputs.checked), 'trigger test') }}
+    if: "${{ contains(needs.detect.outputs.checked, 'PR link to #deploy') }}"
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "${{ needs.detect.outputs.checked }}"
-          echo "${{ contains(fromJSON(needs.detect.outputs.checked), 'trigger test') }}"
+    - name: Send custom JSON data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.27.0
+      with:
+        # This data can be any valid JSON from a previous step in the GitHub Action
+        payload: |
+          {
+            "text": ":rocket: Production Change :rocket:\nTitle: *${{ github.event.pull_request.title }}*\nAuthor: ${{ github.event.pull_request.user.login }}\nURL: ${{ github.event.pull_request.html_url }}"
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
